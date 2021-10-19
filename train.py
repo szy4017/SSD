@@ -49,7 +49,7 @@ def main():
     parser = argparse.ArgumentParser(description='Single Shot MultiBox Detector Training With PyTorch')
     parser.add_argument(
         "--config-file",
-        default="",
+        default="configs/vgg_ssd300_voc0712.yaml",
         metavar="FILE",
         help="path to config file",
         type=str,
@@ -111,4 +111,5 @@ def main():
 
 
 if __name__ == '__main__':
+    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     main()
