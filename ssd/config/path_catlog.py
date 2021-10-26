@@ -3,8 +3,17 @@ import os
 
 class DatasetCatalog:
     #DATA_DIR = 'datasets'
-    DATA_DIR = '/home/szy/data/voc/VOCdevkit'
+    #DATA_DIR = '/home/szy/data/voc/VOCdevkit'
+    DATA_DIR = '/home/szy/data/cityscape'
     DATASETS = {
+        'cityperson_train':{
+            "data_dir":"",
+            "split":"train"
+        },
+        'cityperson_val':{
+            "data_dir": "",
+            "split": "val"
+        },
         'voc_2007_train': {
             "data_dir": "VOC2007",
             "split": "train"
@@ -79,5 +88,16 @@ class DatasetCatalog:
                 ann_file=os.path.join(coco_root, attrs["ann_file"]),
             )
             return dict(factory="COCODataset", args=args)
+        elif "cityperson" in name:
+            cityperson_root = DatasetCatalog.DATA_DIR
+            if 'Cityperson_ROOT' in os.environ:
+                cityperson_root = os.environ['Cityperson_ROOT']
+
+            attrs = DatasetCatalog.DATASETS[name]
+            args = dict(
+                data_dir=os.path.join(cityperson_root, attrs["data_dir"]),
+                split=attrs["split"],
+            )
+            return dict(factory="CitypersonDataset", args=args)
 
         raise RuntimeError("Dataset not available: {}".format(name))

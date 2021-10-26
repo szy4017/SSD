@@ -29,7 +29,7 @@ def main():
     parser = argparse.ArgumentParser(description='SSD Evaluation on VOC and COCO dataset.')
     parser.add_argument(
         "--config-file",
-        default="",
+        default="configs/vgg_ssd300_voc0712.yaml",
         metavar="FILE",
         help="path to config file",
         type=str,
